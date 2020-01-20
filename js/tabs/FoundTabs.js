@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
-import Swiper from 'react-native-swiper';
 import NavigationUtil from '../navigator/NavigationUtil';
 import store from '../store/index';
 import {onThemeChange} from '../store/action/theme/index';
 import {connect} from 'react-redux';
 import axios from '../axios/index.js';
-
 class FoundTab extends Component {
   constructor(props) {
     super(props);
@@ -38,13 +36,7 @@ class FoundTab extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.swiper}>
-          <Swiper
-            style={styles.wrapper}
-            showsButtons={false}
-            // autoplay
-            showsPagination>
-            {this.ImageList()}
-          </Swiper>
+          {this.ImageList()}
         </View>
         <Text
           onPress={() => {
