@@ -9,11 +9,11 @@ export default class DrawerPage extends Component {
     const DrawerNavigator = createAppContainer(
       createDrawerNavigator(
         {
-          第一: {
-            screen: FouceTab,
-          },
           记账本: {
             screen: MoneyTabs,
+          },
+          第一: {
+            screen: FouceTab,
           },
         },
         {
@@ -41,12 +41,6 @@ class FouceTab extends Component {
             this.props.navigation.openDrawer();
           }}>
           打开
-        </Text>
-        <Text
-          onPress={() => {
-            this.props.navigation.closeDrawer();
-          }}>
-          关闭
         </Text>
       </View>
     );
