@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
+import {connect} from 'react-redux';
+import store from '../store/index';
 import NavigationUtil from '../navigator/NavigationUtil';
-export default class FoundPage extends Component {
+
+class CommunityPage extends Component {
   render() {
     const TabNavigator = createAppContainer(
       createMaterialTopTabNavigator(
@@ -28,6 +31,9 @@ export default class FoundPage extends Component {
           tabBarPosition: 'top', //如果在顶部，就是 top
           tabBarOptions: {
             scrollEnabled: true,
+            style: {
+              backgroundColor: this.props.themeState,
+            },
           },
         },
       ),
@@ -40,6 +46,22 @@ export default class FoundPage extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    themeState: store.getState().theme.theme,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+const ProjectNavigationBarContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CommunityPage);
+
+export default ProjectNavigationBarContainer;
 /**
  * 顶部导航组件
  */

@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
+import {connect} from 'react-redux';
+import store from '../store/index';
 import MoneyTabs from '../tabs/MoneyTabs';
 
-export default class DrawerPage extends Component {
+class DrawerPage extends Component {
   render() {
     const DrawerNavigator = createAppContainer(
       createDrawerNavigator(
@@ -31,6 +33,22 @@ export default class DrawerPage extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    themeState: store.getState().theme.theme,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+const ProjectNavigationBarContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DrawerPage);
+
+export default ProjectNavigationBarContainer;
 class FouceTab extends Component {
   render() {
     return (

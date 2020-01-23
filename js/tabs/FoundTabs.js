@@ -53,7 +53,7 @@ class FoundTab extends Component {
           onPress={() => {
             let color = 'red';
             if (this.props.themeState === 'red') {
-              color = 'blue';
+              color = '#0080FF';
             }
             this.props.onThemeChange(color);
           }}>

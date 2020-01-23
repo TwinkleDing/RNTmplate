@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
+import {connect} from 'react-redux';
+import store from '../store/index';
 import FoundTab from '../tabs/FoundTabs';
 import FocusTab from '../tabs/FocusTabs';
-import store from '../store/index';
-import {connect} from 'react-redux';
 
 class FoundPage extends Component {
   constructor(props) {
