@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
+import MoneyTabs from '../tabs/MoneyTabs';
 
 export default class DrawerPage extends Component {
   render() {
@@ -10,6 +11,9 @@ export default class DrawerPage extends Component {
         {
           第一: {
             screen: FouceTab,
+          },
+          记账本: {
+            screen: MoneyTabs,
           },
         },
         {
