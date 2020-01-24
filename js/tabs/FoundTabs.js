@@ -5,6 +5,7 @@ import store from '../store/index';
 import {onThemeChange} from '../store/action/theme/index';
 import {connect} from 'react-redux';
 import axios from '../axios/index.js';
+import Message from '../components/MessageItem';
 class FoundTab extends Component {
   constructor(props) {
     super(props);
@@ -17,27 +18,43 @@ class FoundTab extends Component {
       qingqiu: '未请求',
     };
   }
-  ImageList() {
-    const list = this.state.imageList.map(item => {
-      return (
-        <View key={item} style={styles.slide1}>
-          <Image
-            style={styles.image}
-            source={{
-              uri: item,
-            }}
-          />
-        </View>
-      );
-    });
-    return list;
+  messageList() {
+    let data=[{
+      title:111,
+      type:'主机游戏',
+      time:'1小时前',
+      comments:12,
+      image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576863984509&di=94ee55cbbedfed014002888c43aceaa4&imgtype=0&src=http%3A%2F%2Fd.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F8435e5dde71190ef7db6dd20cb1b9d16fcfa60fb.jpg',
+    },{
+      title:111,
+      type:'手机游戏',
+      time:'2小时前',
+      comments:12,
+      image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576864005759&di=8bd78c0dea41154f43b83fdaf5dfd860&imgtype=0&src=http%3A%2F%2Fd.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F3bf33a87e950352a0d68994e5843fbf2b2118b6f.jpg',
+    },{
+      title:111,
+      type:'PC游戏',
+      time:'3小时前',
+      comments:122,
+      image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576863984509&di=94ee55cbbedfed014002888c43aceaa4&imgtype=0&src=http%3A%2F%2Fd.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F8435e5dde71190ef7db6dd20cb1b9d16fcfa60fb.jpg',
+    }]
+    const list = data.map((item,index) => {
+      return <Message key={index} data={item} />
+    })
+    return list
   }
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.swiper}>
-          {this.ImageList()}
+          <Image
+            style={styles.image}
+            source={{
+              uri: this.state.imageList[0],
+            }}
+          />
         </View>
+        <View>{this.messageList()}</View>
         <Text
           onPress={() => {
             NavigationUtil.goPage(
@@ -102,6 +119,7 @@ const styles = StyleSheet.create({
   },
   swiper: {
     height: 200,
+    width: '100%',
   },
   image: {
     height: '100%',

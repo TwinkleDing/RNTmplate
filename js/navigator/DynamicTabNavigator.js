@@ -86,7 +86,7 @@ class DynamicTabNavigator extends Component {
       createBottomTabNavigator(tabs, {
         lazy: true,
         animationEnabled: false,
-        initialRouteName: 'DrawerNavigator',
+        initialRouteName: 'FoundPage',
         backBehavior: 'none',
         tabBarOptions: {
           activeTintColor: this.props.themeState,
