@@ -20,13 +20,6 @@ class FoundTab extends Component {
       data: []
     };
   }
-  listShow() {
-    let data = this.state.data
-    const list = data.map((item,index) => {
-      return <Message key={index} data={item} />
-    })
-    return list
-  }
   UNSAFE_componentWillMount() {
     this.getList();
   }
@@ -44,6 +37,23 @@ class FoundTab extends Component {
       })
     });
   }
+  listShow() {
+    let data = this.state.data
+    const list = data.map((item,index) => {
+      return <Message onPress={()=>{this.openDetail(item)}} key={index} data={item} />
+    })
+    return list
+  }
+  openDetail = (item)=> {
+    console.log(this.props)
+    console.log(item)
+    NavigationUtil.goPage(
+      {
+        navigation: this.props.navigation,
+      },
+      'DetailPage',
+    );
+  }
   timeChange(date) {
     const time = new Date().getTime() - new Date(date).getTime();
     const minutes = Math.floor(time/1000/60);
@@ -59,50 +69,50 @@ class FoundTab extends Component {
   }
   render() {
     return (
-      <ScrollView style={{height: '100vh'}}>
+      <ScrollView>
         <View style={styles.container}>
-        <View style={styles.swiper}>
-          <Image
-            style={styles.image}
-            source={{
-              uri: this.state.imageList[0],
-            }}
-          />
+          <View style={styles.swiper}>
+            <Image
+              style={styles.image}
+              source={{
+                uri: this.state.imageList[0],
+              }}
+            />
+          </View>
+          <Text
+            onPress={() => {
+              NavigationUtil.goPage(
+                {
+                  navigation: this.props.navigation,
+                },
+                'DetailPage',
+              );
+            }}>
+            跳转到详情页
+          </Text>
+          <Text
+            onPress={() => {
+              let color = 'red';
+              if (this.props.themeState === 'red') {
+                color = '#0080FF';
+              }
+              this.props.onThemeChange(color);
+            }}>
+            切换导航栏颜色
+          </Text>
+          <Text
+            onPress={() => {
+              axios.get('http://www.mockhttp.cn/mock/TwinkleDing').then(res => {
+                console.log(res);
+                this.setState({qingqiu: res.data});
+                console.log(this);
+              });
+            }}>
+            请求
+          </Text>
+          <Text>{this.state.qingqiu}</Text>
+          <View style={{width:'100%'}}>{this.listShow()}</View>
         </View>
-        <Text
-          onPress={() => {
-            NavigationUtil.goPage(
-              {
-                navigation: this.props.navigation,
-              },
-              'DetailPage',
-            );
-          }}>
-          跳转到详情页
-        </Text>
-        <Text
-          onPress={() => {
-            let color = 'red';
-            if (this.props.themeState === 'red') {
-              color = '#0080FF';
-            }
-            this.props.onThemeChange(color);
-          }}>
-          切换导航栏颜色
-        </Text>
-        <Text
-          onPress={() => {
-            axios.get('http://www.mockhttp.cn/mock/TwinkleDing').then(res => {
-              console.log(res);
-              this.setState({qingqiu: res.data});
-              console.log(this);
-            });
-          }}>
-          请求
-        </Text>
-        <Text>{this.state.qingqiu}</Text>
-        <View style={{width:'100%'}}>{this.listShow()}</View>
-      </View>
       </ScrollView>
     );
   }
@@ -137,6 +147,7 @@ const styles = StyleSheet.create({
   swiper: {
     height: 200,
     width: '100%',
+    backgroundColor:'transparent'
   },
   image: {
     height: '100%',
