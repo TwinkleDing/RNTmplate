@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import Icon from '../Icon/MyIcon';
 
 export class MessageItem extends Component {
     constructor(props) {
         super(props);
     }
+    openDetail=()=>{
+        console.log(this.props.data)
+    }
     render() {
         return (
-            <View style={styles.item}>
+            <TouchableOpacity onPress={this.openDetail} style={styles.item}>
                 <View style={styles.text}>
                     <View style={styles.title}>
                         <Text>{this.props.data.title}</Text>
@@ -31,7 +34,7 @@ export class MessageItem extends Component {
                         }}
                     />
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     }
 }
