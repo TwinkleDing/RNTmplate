@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import axios from '../axios/index.js';
 import Message from '../components/MessageItem';
 import { messageList } from '../https';
+import AsyncStorage from '@react-native-community/async-storage';
 class FoundTab extends Component {
   constructor(props) {
     super(props);
@@ -23,19 +24,23 @@ class FoundTab extends Component {
   UNSAFE_componentWillMount() {
     this.getList();
   }
-  getList = () => {
-    axios.get(messageList).then(res => {
-      res.data.result.data.map(item => {
-        item.type = item.author_name
-        item.time = this.timeChange(item.date)
-        item.image = item.thumbnail_pic_s
-        item.comments = item.category
-        item.id = item.uniquekey
-      })
-      this.setState({
-        data: res.data.result.data
-      })
-    });
+  getList = async () => {
+    this.setState({
+      data: JSON.parse(await AsyncStorage.getItem('list'))
+    })
+    // axios.get(messageList).then(res => {
+    //   res.data.result.data.map(item => {
+    //     item.type = item.author_name
+    //     item.time = this.timeChange(item.date)
+    //     item.image = item.thumbnail_pic_s
+    //     item.comments = item.category
+    //     item.id = item.uniquekey
+    //   })
+    //   this.setState({
+    //     data: res.data.result.data
+    //   })
+    //   AsyncStorage.setItem('list', JSON.stringify(res.data.result.data))
+    // });
   }
   listShow() {
     let data = this.state.data
@@ -45,8 +50,6 @@ class FoundTab extends Component {
     return list
   }
   openDetail = (item)=> {
-    console.log(this.props)
-    console.log(item)
     NavigationUtil.goPage(
       {
         navigation: this.props.navigation,

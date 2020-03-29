@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import NavigationUtil from '../../navigator/NavigationUtil';
 import Icon from '../Icon/MyIcon';
 
 export class MessageItem extends Component {
@@ -7,7 +8,13 @@ export class MessageItem extends Component {
         super(props);
     }
     openDetail=()=>{
-        console.log(this.props.data)
+        NavigationUtil.goPage(
+        {
+            navigation: this.props.navigation,
+            data: this.props.data
+        },
+        'DetailPage',
+        );
     }
     render() {
         return (

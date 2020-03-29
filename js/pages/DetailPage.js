@@ -7,6 +7,7 @@ import NavigationUtil from '../navigator/NavigationUtil';
 export default class DetailPage extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props.navigation)
   }
   componentDidMount() {
     if (Platform.OS === 'android') {
