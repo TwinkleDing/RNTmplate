@@ -6,6 +6,8 @@
 
 rn的问题
 
+大问题：老是启动不了，
+
 task ':app:installDebug'问题：模拟器打开不行，用手机就可以
 
 1. 运行react native设备时需要连接真机或者模拟器。
